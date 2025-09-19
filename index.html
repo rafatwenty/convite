@@ -1,80 +1,109 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ACEITA SAIR COMIGO?</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ACEITA SAIR COMIGO?</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      background-color: #f8c8d3;
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
-      overflow: hidden;
-    }
+        body {
+            background-color: #f8c8d3; /* Rosa claro */
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
 
-    .container {
-      position: relative;
-    }
+        .container {
+            position: relative;
+        }
 
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      color: #333;
-    }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
 
-    .buttons {
-      margin-top: 20px;
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      position: relative;
-    }
+        .buttons {
+            margin-top: 20px;
+        }
 
-    button {
-      font-size: 1.5rem;
-      padding: 10px 20px;
-      cursor: pointer;
-      border: none;
-      border-radius: 5px;
-      transition: 0.3s;
-    }
+        button {
+            font-size: 1.5rem;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            transition: 0.3s;
+            position: relative; /* Para garantir posição inicial */
+        }
 
-    button:hover {
-      background-color: #ffd1dc;
-    }
+        button:hover {
+            background-color: #ffd1dc;
+        }
 
-    #sim {
-      background-color: #ff80ab;
-      position: relative;
-      z-index: 1;
-    }
+        #sim {
+            background-color: #ff80ab;
+        }
 
-    #nao {
-      background-color: #ff4081;
-      position: absolute;
-      z-index: 2;
-    }
+        #nao {
+            background-color: #ff4081;
+            position: absolute; /* importante para mover */
+        }
 
-    .imagem img {
-      max-width: 100%;
-      border-radius: 10px;
-      max-height: 400px;
-      margin-top: 20px;
-    }
-  </style>
+        .imagem img {
+            max-width: 100%;
+            border-radius: 10px;
+            max-height: 400px;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>ACEITA SAIR COMIGO?</h1>
-    <div class="buttons">
-      <button id="sim" onclick="showImage()">SIM</button>
+    <div class="container">
+        <h1>ACEITA SAIR COMIGO?</h1>
+        <div class="buttons">
+            <button id="sim" onclick="showImage()">SIM</button>
+            <button id="nao" onclick="moveNao()">NÃO</button>
+        </div>
+        <div id="imagem" class="imagem" style="display:none;">
+            <img src="sua-imagem.jpg" alt="Sua Foto" />
+        </div>
+    </div>
+
+    <script>
+        function moveNao() {
+            const buttonNao = document.getElementById("nao");
+            let count = 0;
+            const maxMoves = 5;
+            const intervalTime = 200; // ms
+
+            const interval = setInterval(() => {
+                const randomX = Math.random() * (window.innerWidth - buttonNao.offsetWidth);
+                const randomY = Math.random() * (window.innerHeight - buttonNao.offsetHeight);
+
+                buttonNao.style.left = randomX + 'px';
+                buttonNao.style.top = randomY + 'px';
+
+                count++;
+                if (count >= maxMoves) {
+                    clearInterval(interval);
+                }
+            }, intervalTime);
+        }
+
+        function showImage() {
+            const imageDiv = document.getElementById("imagem");
+            imageDiv.style.display = "block";
+        }
+    </script>
+</body>
+</html>
