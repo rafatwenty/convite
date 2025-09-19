@@ -89,4 +89,30 @@
             const buttonNao = document.getElementById("nao");
             let count = 0;
             const maxMoves = 5;
-            const intervalTime = 2
+            const intervalTime = 200; // tempo entre pulos em ms
+            const margin = 20; // margem para não sumir da tela
+
+            const interval = setInterval(() => {
+                const maxX = window.innerWidth - buttonNao.offsetWidth - margin;
+                const maxY = window.innerHeight - buttonNao.offsetHeight - margin;
+
+                const randomX = Math.random() * maxX + margin / 2;
+                const randomY = Math.random() * maxY + margin / 2;
+
+                buttonNao.style.left = randomX + 'px';
+                buttonNao.style.top = randomY + 'px';
+
+                count++;
+                if (count >= maxMoves) {
+                    clearInterval(interval);
+                }
+            }, intervalTime);
+        }
+
+        function showImage() {
+            const imageDiv = document.getElementById("imagem");
+            imageDiv.style.display = "block";
+        }
+    </script>
+</body>
+</html>
