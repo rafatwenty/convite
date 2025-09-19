@@ -34,7 +34,7 @@
     .buttons-wrapper {
       display: flex;
       justify-content: center;
-      gap: 20px;
+      gap: 40px; /* distância entre os botões */
       position: relative;
     }
 
@@ -54,6 +54,8 @@
     #nao {
       background-color: #ff4081;
       position: absolute;
+      left: 120px;
+      top: 0;
     }
 
     #sim:hover, #nao:hover {
@@ -84,21 +86,29 @@
     const buttonNao = document.getElementById("nao");
     const wrapper = document.getElementById("buttonsWrapper");
 
-    // Posição inicial do botão "NÃO"
-    buttonNao.style.left = '120px';
-    buttonNao.style.top = '0px';
-
     function moveNao() {
-      const wrapperRect = wrapper.getBoundingClientRect();
       const buttonWidth = buttonNao.offsetWidth;
       const buttonHeight = buttonNao.offsetHeight;
 
-      const maxX = wrapperRect.width - buttonWidth;
-      const maxY = wrapperRect.height - buttonHeight;
+      const maxX = window.innerWidth - buttonWidth - 40;
+      const maxY = window.innerHeight - buttonHeight - 40;
 
-      const randomX = Math.random() * maxX;
-      const randomY = Math.random() * maxY;
+      let randomX = Math.random() * maxX;
+      let randomY = Math.random() * maxY;
 
+      // Garante que o botão se mova com distância mínima de 100px
+      const currentX = parseFloat(buttonNao.style.left) || 0;
+      const currentY = parseFloat(buttonNao.style.top) || 0;
+
+      while (Math.abs(randomX - currentX) < 100) {
+        randomX = Math.random() * maxX;
+      }
+
+      while (Math.abs(randomY - currentY) < 100) {
+        randomY = Math.random() * maxY;
+      }
+
+      buttonNao.style.position = "fixed";
       buttonNao.style.left = `${randomX}px`;
       buttonNao.style.top = `${randomY}px`;
     }
