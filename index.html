@@ -43,6 +43,7 @@
             border: none;
             border-radius: 5px;
             transition: 0.3s;
+            position: relative; /* Para garantir posição inicial */
         }
 
         button:hover {
@@ -55,6 +56,7 @@
 
         #nao {
             background-color: #ff4081;
+            position: absolute; /* importante para mover */
         }
 
         .imagem img {
@@ -80,12 +82,22 @@
     <script>
         function moveNao() {
             const buttonNao = document.getElementById("nao");
-            const randomX = Math.random() * (window.innerWidth - buttonNao.offsetWidth);
-            const randomY = Math.random() * (window.innerHeight - buttonNao.offsetHeight);
+            let count = 0;
+            const maxMoves = 5;
+            const intervalTime = 200; // ms
 
-            buttonNao.style.position = 'absolute';
-            buttonNao.style.left = randomX + 'px';
-            buttonNao.style.top = randomY + 'px';
+            const interval = setInterval(() => {
+                const randomX = Math.random() * (window.innerWidth - buttonNao.offsetWidth);
+                const randomY = Math.random() * (window.innerHeight - buttonNao.offsetHeight);
+
+                buttonNao.style.left = randomX + 'px';
+                buttonNao.style.top = randomY + 'px';
+
+                count++;
+                if (count >= maxMoves) {
+                    clearInterval(interval);
+                }
+            }, intervalTime);
         }
 
         function showImage() {
