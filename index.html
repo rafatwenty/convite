@@ -35,17 +35,19 @@
     .buttons-wrapper {
       display: flex;
       justify-content: center;
-      gap: 30px;
+      gap: 40px; /* espaçamento agradável */
       position: relative;
+      margin-top: 20px;
     }
 
     #sim, #nao {
       font-size: 1.5rem;
-      padding: 10px 20px;
+      padding: 10px 25px;
       cursor: pointer;
       border: none;
       border-radius: 5px;
-      transition: 0.3s;
+      transition: background-color 0.3s, transform 0.3s;
+      position: relative;
     }
 
     #sim {
@@ -54,9 +56,6 @@
 
     #nao {
       background-color: #ff4081;
-      position: absolute;
-      left: 150px;
-      top: 0;
     }
 
     #sim:hover, #nao:hover {
@@ -67,14 +66,14 @@
       max-width: 100%;
       border-radius: 10px;
       max-height: 400px;
-      margin-top: 20px;
+      margin-top: 30px;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>ACEITA SAIR COMIGO?</h1>
-    <div class="buttons-wrapper" id="buttonsWrapper">
+    <div class="buttons-wrapper">
       <button id="sim" onclick="showImage()">SIM</button>
       <button id="nao" onclick="moveNao()">NÃO</button>
     </div>
@@ -86,29 +85,35 @@
   <script>
     const buttonNao = document.getElementById("nao");
 
+    // Define posição inicial fixa para evitar bug visual
+    buttonNao.style.position = "relative";
+    buttonNao.style.left = "0px";
+    buttonNao.style.top = "0px";
+
     function moveNao() {
       const buttonWidth = buttonNao.offsetWidth;
       const buttonHeight = buttonNao.offsetHeight;
+      const padding = 60;
 
-      const padding = 50; // margem de segurança para não sair da tela
       const maxX = window.innerWidth - buttonWidth - padding;
       const maxY = window.innerHeight - buttonHeight - padding;
 
       let randomX = Math.floor(Math.random() * maxX);
       let randomY = Math.floor(Math.random() * maxY);
 
-      // Garante que o botão se mova com distância mínima de 100px
+      // Garante distância mínima perceptível
       const currentX = parseFloat(buttonNao.style.left) || 0;
       const currentY = parseFloat(buttonNao.style.top) || 0;
 
-      while (Math.abs(randomX - currentX) < 100) {
+      while (Math.abs(randomX - currentX) < 120) {
         randomX = Math.floor(Math.random() * maxX);
       }
 
-      while (Math.abs(randomY - currentY) < 100) {
+      while (Math.abs(randomY - currentY) < 120) {
         randomY = Math.floor(Math.random() * maxY);
       }
 
+      // Aplica movimento com estilo
       buttonNao.style.position = "fixed";
       buttonNao.style.left = `${randomX}px`;
       buttonNao.style.top = `${randomY}px`;
