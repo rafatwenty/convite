@@ -37,6 +37,7 @@
       display: flex;
       justify-content: center;
       gap: 20px;
+      position: relative;
     }
 
     button {
@@ -76,4 +77,29 @@
       <button id="sim" onclick="showImage()">SIM</button>
       <button id="nao" onclick="moveNao()">NÃO</button>
     </div>
-    <div id="imagem" class="imagem" style="display
+    <div id="imagem" class="imagem" style="display:none;">
+      <img src="sua-imagem.jpg" alt="Sua Foto" />
+    </div>
+  </div>
+
+  <script>
+    const buttonNao = document.getElementById("nao");
+
+    function moveNao() {
+      const margin = 20;
+      const maxX = window.innerWidth - buttonNao.offsetWidth - margin;
+      const maxY = window.innerHeight - buttonNao.offsetHeight - margin;
+
+      const randomX = Math.random() * maxX;
+      const randomY = Math.random() * maxY;
+
+      buttonNao.style.left = `${randomX}px`;
+      buttonNao.style.top = `${randomY}px`;
+    }
+
+    function showImage() {
+      document.getElementById("imagem").style.display = "block";
+    }
+  </script>
+</body>
+</html>
