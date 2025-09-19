@@ -23,7 +23,9 @@
     }
 
     .container {
+      text-align: center;
       position: relative;
+      width: 100%;
     }
 
     h1 {
@@ -32,15 +34,14 @@
       color: #333;
     }
 
-    .buttons {
-      margin-top: 20px;
+    .buttons-wrapper {
       display: flex;
       justify-content: center;
       gap: 20px;
       position: relative;
     }
 
-    button {
+    #sim, #nao {
       font-size: 1.5rem;
       padding: 10px 20px;
       cursor: pointer;
@@ -49,12 +50,12 @@
       transition: 0.3s;
     }
 
-    button:hover {
-      background-color: #ffd1dc;
-    }
-
     #sim {
       background-color: #ff80ab;
+    }
+
+    #sim:hover, #nao:hover {
+      background-color: #ffd1dc;
     }
 
     #nao {
@@ -73,7 +74,7 @@
 <body>
   <div class="container">
     <h1>ACEITA SAIR COMIGO?</h1>
-    <div class="buttons">
+    <div class="buttons-wrapper">
       <button id="sim" onclick="showImage()">SIM</button>
       <button id="nao" onclick="moveNao()">NÃO</button>
     </div>
@@ -85,8 +86,14 @@
   <script>
     const buttonNao = document.getElementById("nao");
 
+    // Posição inicial para alinhar com o "SIM"
+    buttonNao.style.left = '120px';
+    buttonNao.style.top = '0px';
+
     function moveNao() {
       const margin = 20;
+
+      // Garante que o botão se mova dentro da janela visível
       const maxX = window.innerWidth - buttonNao.offsetWidth - margin;
       const maxY = window.innerHeight - buttonNao.offsetHeight - margin;
 
