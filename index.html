@@ -19,6 +19,7 @@
       justify-content: center;
       align-items: center;
       overflow: hidden;
+      position: relative;
     }
 
     .container {
@@ -34,7 +35,7 @@
     .buttons-wrapper {
       display: flex;
       justify-content: center;
-      gap: 40px; /* distância entre os botões */
+      gap: 30px;
       position: relative;
     }
 
@@ -54,7 +55,7 @@
     #nao {
       background-color: #ff4081;
       position: absolute;
-      left: 120px;
+      left: 150px;
       top: 0;
     }
 
@@ -84,28 +85,28 @@
 
   <script>
     const buttonNao = document.getElementById("nao");
-    const wrapper = document.getElementById("buttonsWrapper");
 
     function moveNao() {
       const buttonWidth = buttonNao.offsetWidth;
       const buttonHeight = buttonNao.offsetHeight;
 
-      const maxX = window.innerWidth - buttonWidth - 40;
-      const maxY = window.innerHeight - buttonHeight - 40;
+      const padding = 50; // margem de segurança para não sair da tela
+      const maxX = window.innerWidth - buttonWidth - padding;
+      const maxY = window.innerHeight - buttonHeight - padding;
 
-      let randomX = Math.random() * maxX;
-      let randomY = Math.random() * maxY;
+      let randomX = Math.floor(Math.random() * maxX);
+      let randomY = Math.floor(Math.random() * maxY);
 
       // Garante que o botão se mova com distância mínima de 100px
       const currentX = parseFloat(buttonNao.style.left) || 0;
       const currentY = parseFloat(buttonNao.style.top) || 0;
 
       while (Math.abs(randomX - currentX) < 100) {
-        randomX = Math.random() * maxX;
+        randomX = Math.floor(Math.random() * maxX);
       }
 
       while (Math.abs(randomY - currentY) < 100) {
-        randomY = Math.random() * maxY;
+        randomY = Math.floor(Math.random() * maxY);
       }
 
       buttonNao.style.position = "fixed";
