@@ -19,6 +19,7 @@
             align-items: center;
             height: 100vh;
             text-align: center;
+            overflow: hidden; /* evita scroll ao mover o botão */
         }
 
         .container {
@@ -33,6 +34,8 @@
 
         .buttons {
             margin-top: 20px;
+            position: relative;
+            height: 60px; /* altura para o botão se mover sem quebrar layout */
         }
 
         button {
@@ -43,7 +46,7 @@
             border: none;
             border-radius: 5px;
             transition: 0.3s;
-            position: relative; /* Para garantir posição inicial */
+            position: relative; /* posição inicial */
         }
 
         button:hover {
@@ -56,7 +59,9 @@
 
         #nao {
             background-color: #ff4081;
-            position: absolute; /* importante para mover */
+            position: absolute; /* para poder mover */
+            top: 10px; /* posição inicial */
+            left: 120px; /* posição inicial */
         }
 
         .imagem img {
@@ -84,26 +89,4 @@
             const buttonNao = document.getElementById("nao");
             let count = 0;
             const maxMoves = 5;
-            const intervalTime = 200; // ms
-
-            const interval = setInterval(() => {
-                const randomX = Math.random() * (window.innerWidth - buttonNao.offsetWidth);
-                const randomY = Math.random() * (window.innerHeight - buttonNao.offsetHeight);
-
-                buttonNao.style.left = randomX + 'px';
-                buttonNao.style.top = randomY + 'px';
-
-                count++;
-                if (count >= maxMoves) {
-                    clearInterval(interval);
-                }
-            }, intervalTime);
-        }
-
-        function showImage() {
-            const imageDiv = document.getElementById("imagem");
-            imageDiv.style.display = "block";
-        }
-    </script>
-</body>
-</html>
+            const intervalTime = 2
