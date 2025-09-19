@@ -48,19 +48,19 @@
       border: none;
       border-radius: 5px;
       transition: 0.3s;
+      position: relative;
     }
 
     #sim {
       background-color: #ff80ab;
     }
 
-    #sim:hover, #nao:hover {
-      background-color: #ffd1dc;
-    }
-
     #nao {
       background-color: #ff4081;
-      position: absolute;
+    }
+
+    #sim:hover, #nao:hover {
+      background-color: #ffd1dc;
     }
 
     .imagem img {
@@ -74,7 +74,7 @@
 <body>
   <div class="container">
     <h1>ACEITA SAIR COMIGO?</h1>
-    <div class="buttons-wrapper">
+    <div class="buttons-wrapper" id="buttonsWrapper">
       <button id="sim" onclick="showImage()">SIM</button>
       <button id="nao" onclick="moveNao()">NÃO</button>
     </div>
@@ -85,21 +85,17 @@
 
   <script>
     const buttonNao = document.getElementById("nao");
-
-    // Posição inicial para alinhar com o "SIM"
-    buttonNao.style.left = '120px';
-    buttonNao.style.top = '0px';
+    const buttonsWrapper = document.getElementById("buttonsWrapper");
 
     function moveNao() {
       const margin = 20;
-
-      // Garante que o botão se mova dentro da janela visível
       const maxX = window.innerWidth - buttonNao.offsetWidth - margin;
       const maxY = window.innerHeight - buttonNao.offsetHeight - margin;
 
       const randomX = Math.random() * maxX;
       const randomY = Math.random() * maxY;
 
+      buttonNao.style.position = "fixed";
       buttonNao.style.left = `${randomX}px`;
       buttonNao.style.top = `${randomY}px`;
     }
